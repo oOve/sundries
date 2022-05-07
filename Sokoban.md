@@ -70,10 +70,10 @@ The finished product should look something like this (for the GM):
 
 
 ## Caveats/Notes:
-This module not only requires the GM to be logged in to work, it also requires the GM to have the map “active” (not on another tab). If your detection macro does not trigger for your players, this might be the reason.
-As you can see in the “door handle” tile, there are no fancy tests done before starting the actions for the reward. This is because Active Tile triggers will automatically stop the following actions if a macro returns false.
-The state macro sends each specific crate back to its starting position, but the test solution macro ignores these. If you mark your solution in a specific order, it will also return true for any other order of crates (as long as it is from the same list as before).
-If you delete/add a crate, you need to re-create all the macros. I suggest deleting the old ones first.
-The “delay-action” in the target tiles are there so that the crate has had time to move to its final position before testing if it's at its correct place. You might need to tweak this “0.5” seconds if the Test final state does not trigger.
+* This module not only requires the GM to be logged in to work, it also requires the GM to have the map “active” (not on another tab). If your detection macro does not trigger for your players, this might be the reason.
+* As you can see in the “door handle” tile, there are no fancy tests done before starting the actions for the reward. This is because Active Tile triggers will automatically stop the following actions if a macro returns false.
+* The state macro sends each specific crate back to its starting position, but the test solution macro ignores these. If you mark your solution in a specific order, it will also return true for any other order of crates (as long as it is from the same list as before).
+* If you delete/add a crate, you need to re-create all the macros. I suggest deleting the old ones first.
+* The “delay-action” in the target tiles are there so that the crate has had time to move to its final position before testing if it's at its correct place. You might need to tweak this “0.5” seconds if the Test final state does not trigger.
 
 
