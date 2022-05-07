@@ -18,7 +18,7 @@ Create a Crate token, mark it pushable (and pullable) and drag it onto your scen
 ![image](https://user-images.githubusercontent.com/8543541/167253693-4e4c3c80-d025-41fd-9c5d-006997945708.png)
 
 ## Step 2 -- Create a Reset State / Revert Macro
-Ensure that all your tokens/crates are in their initial position and select/mark them all. With all tokens selected, run the “Harvest State” macro. The Harvest State macro presents a text input, in this type in your room name, I will type in Room 4, and click Ok.
+Ensure that all your tokens/crates are in their initial position and select/mark them all. With all tokens selected, run the [Harvest State](Harvest%20State.md)  macro. The Harvest State macro presents a text input, in this type in your room name, I will type in Room 4, and click Ok.
 Next to your macro hotbar there is a small folder icon, click that and the full list of all your macros will show up. In this list there should now be a macro called: “Restore Room 4”
 
 ![image](https://user-images.githubusercontent.com/8543541/167254157-fa6ee31e-bef2-4016-93e3-c72633fe387b.png)
@@ -33,7 +33,7 @@ Add a trigger “On Click” and the Action: Run Macro, “Restore Room 4” and
 You now have a lever you can click to reset the scene. If you wish your players to be able to reset the scene as well, place the lever in view of the players. As long as you selected “Controlled by anyone” and the macro was run as GM your players should be able to use it as well.
 
 ## Step 4 – Defining the End Goal
-Move all your crates around to put them in their final positions. As before make sure you mark them all (as shown in the image below), and this time run the macro called “Define Correct”. In the prompt, put in “Room 4”.
+Move all your crates around to put them in their final positions. As before make sure you mark them all (as shown in the image below), and this time run the macro called [Define Correct](Define%20Correct.md). In the prompt, put in “Room 4”.
 ![image](https://user-images.githubusercontent.com/8543541/167254991-53d6bed8-8047-4e7b-ab20-60aedc910e9a.png)
 
 As before this created a new macro for you. You’ll find it the same place as the previous macro, it will be named: “Test Against State Room 4”. 
