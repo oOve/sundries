@@ -75,5 +75,6 @@ The finished product should look something like this (for the GM):
 * The state macro sends each specific crate back to its starting position, but the test solution macro ignores these. If you mark your solution in a specific order, it will also return true for any other order of crates (as long as it is from the same list as before).
 * If you delete/add a crate, you need to re-create all the macros. I suggest deleting the old ones first.
 * The “delay-action” in the target tiles are there so that the crate has had time to move to its final position before testing if it's at its correct place. You might need to tweak this “0.5” seconds if the Test final state does not trigger.
+* To play with true Sokoban rules, you need to disable pull, dis-allow diagonal movement, set the push limit to 1, and tell your players to not drag and drop their token (hmm.maybe the pushable module could optionally enforce this in the future).
 
 
