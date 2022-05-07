@@ -5,8 +5,8 @@ I have previously made sokoban maps using the on-enter/on-exit functionality of 
 ## Modules required:
  * Pushable
  * Monks Active Tiles
- * Harvest State (found here)
- * Define Correct (found here)
+ * Harvest State (found [here](Harvest%20State.md) )
+ * Define Correct (found [here](Define%20Correct.md) )
 
 ## Setup
 In these maps I have marked the crates initial position in green, and the target/goal positions in red (red can overlap green as you see).
