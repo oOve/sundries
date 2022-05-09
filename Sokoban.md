@@ -50,7 +50,7 @@ Set the tile to “On Click” and add the actions:
 ## Step 5 – Automating it All
 It is kinda daft having to click the button every time you wish to see if the boxes are in their right position, so lets automate that.
 
-Create a new tile, and scale it down so it fits within one grid cell. Mark this tile as “Hidden”:
+Create a new tile, and scale it down to one grid cell. Mark this tile as “Hidden”:
 
 ![image](https://user-images.githubusercontent.com/8543541/167255525-31af9eb7-92d6-4392-8fd3-fa40b21b1e85.png)
 
