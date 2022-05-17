@@ -27,8 +27,10 @@ for(let target of targets){
     sequence.effect()
         .atLocation(target)
         .file("jb2a.explosion.01.orange")
+        .sound("media/156031__iwiploppenisse__explosion.mp3")
+       ;
 }
-sequence.play();
+
 ```
 Make sure you remember set its **Type** over to **script**
 
