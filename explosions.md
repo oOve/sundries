@@ -15,6 +15,9 @@ The NPC also needs to have an attack action, call this action "Explosion"
 
 ![image](https://user-images.githubusercontent.com/8543541/168702427-42a80caf-55a4-40d4-99cb-45a2e05ed7aa.png)
 
+Next head over to [freesound](https://freesound.org/people/Iwiploppenisse/sounds/156031/) and download a suitable sound file for the explosion.
+In the macro below, we need the file to be placed under "media/156031__iwiploppenisse__explosion.mp3", replace this with your selection of sound.
+
 ## Step 2 -- A Sequencer Macro
 
 Click the token-bar or create a new macro from the macro menu. Call this macro "Explode At Tokens".
