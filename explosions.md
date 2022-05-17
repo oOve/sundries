@@ -47,7 +47,6 @@ Double click the tile to bring up its configuration, and move over to the "_Trig
 1. Set the tile to trigger "On Enter"
 2. Add the _"Run Macro"_ action, and set it to run the macro we created in step 2.
 3. Add the _"Attack"_ action, select our Trap actor, and the "Explosion" attack.
-4. (optionally add a fitting sound to play as well.)
 
 And, thats all.
 
