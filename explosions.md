@@ -1,5 +1,5 @@
 ## Explosions
-Do you wish to spring an explosive trap on your players,? of course you want.
+Do you wish to spring an explosive trap on your players,? of course you do.
 For this tutorial you need the following modules:
  * Monks Active Tiles
  * Sequencer
