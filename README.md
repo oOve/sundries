@@ -6,6 +6,7 @@ Tutorials so far:
  * [Sokoban Maps](./Sokoban.md)
  * [Aura Creating Item](./aura-creating-item.md)
  * [Explosions!!](./explosions.md)
+ * [4 Digit Code Puzzle](./Digits%20Code%20Puzzle.md)
 
 Macro snippets:
  * [Set/reset vision for tokens](./set-reset%20vision.js) for when you want to reduce the vision of all your players, due to e.g., magical darkness, a blizzard or a sandstorm.
