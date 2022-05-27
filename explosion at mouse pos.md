@@ -1,6 +1,6 @@
 Explosions at the mouse position:
 
-´´´JS
+```JS
 let mouse = canvas.app.renderer.plugins.interaction.mouse;
 let local = mouse.getLocalPosition(canvas.app.stage);
 
@@ -12,4 +12,4 @@ sequence.effect()
    ;
 
 sequence.play();
-´´´
+```
