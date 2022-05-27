@@ -35,3 +35,4 @@ These tiles are triggered by click, from anyone and have the following _actions_
  3. **Delay Actions:** We need to wait a bit, untill the digit is done changing, before running the macro to test for correct digits
  4. **Trigger Tile:** Trigger the tile we set up to test for the correct combo, and if so, trigger the reward.
 
+If you wish to add two "buttons" one to increment and one to decrement the number, replace the above with: ""= (Number({{entity.data.text}})+9)%10". (yes, that adds 9 instead of -1, because javascript.)
