@@ -5,7 +5,7 @@ It will rotate any number of tagged elements, be it tokens, tiles, or generic pl
 Every time a token moves, the "cannons" will point at their respective closest player owned
 token.
 This macro has a hardcoded angle set to 90, this is their initial offset, which will vary based on 
-where your drawing points initially. If I'm not mistaken, replace 90 with 0 if your "cannons" point upward.
+where your drawing points initially. If I'm not mistaken, replace 90 with 180 if your "cannons" point upward.
 
 ![ezgif-3-0a610f234c](https://user-images.githubusercontent.com/8543541/170799004-3e8e2654-5b23-4226-b683-3d4e1f25aa97.gif)
 
@@ -74,3 +74,77 @@ let hook_ID = Hooks.on("updateToken", onUpdateToken);
 // And lets keep the id, to avoid binding to it twice.
 document.cannon_O_o_hook = hook_ID;
 ```
+
+
+To have the cannons automatically shoot when there is a clear line of sight:
+```JS
+/*
+▓█████▄  ██▀███           ▒█████  
+▒██▀ ██▌▓██ ▒ ██▒        ▒██▒  ██▒
+░██   █▌▓██ ░▄█ ▒        ▒██░  ██▒
+░▓█▄   ▌▒██▀▀█▄          ▒██   ██░
+░▒████▓ ░██▓ ▒██▒ ██▓    ░ ████▓▒░
+ ▒▒▓  ▒ ░ ▒▓ ░▒▓░ ▒▓▒    ░ ▒░▒░▒░ 
+ ░ ▒  ▒   ░▒ ░ ▒░ ░▒       ░ ▒ ▒░ 
+ ░ ░  ░   ░░   ░  ░      ░ ░ ░ ▒  
+   ░       ░       ░         ░ ░  
+ ░                 ░              
+This macro is made by Dr.O_o 
+If you appreciate this, consider buying me a coffee
+at https://www.patreon.com/drO_o
+*/
+let cannons = Tagger.getByTag('cannon');
+
+const argFact = (compareFn) => (array) => array.map((el, idx) => [el, idx]).reduce(compareFn)[1]
+const argMax = argFact((min, el) => (el[0] > min[0] ? el : min))
+const argMin = argFact((max, el) => (el[0] < max[0] ? el : max))
+
+function rad2deg(radians){return radians * 180 / Math.PI;}
+function vSub(v1,v2){return {x:v1.x-v2.x, y:v1.y-v2.y}}
+function len2(v1,v2){return (v1.x-v2.x)**2 + (v1.y-v2.y)**2 }
+
+function onUpdateToken(token, change, options, user_id){
+  let players = canvas.tokens.placeables.filter( t=>t.actor.hasPlayerOwner );
+  console.log(players);
+  if (players.length){
+  for (let cannon of cannons){
+    let distances = players.map( p=>len2(p.center, cannon.object.center));
+    
+    // Player[i] is closest
+    let i = argMin(distances);    
+    // Pointing vector from cannon to player
+    let dir = vSub(players[i].center, cannon.object.center);
+    let r = Math.atan2(dir.x, dir.y);
+    // Add 90 (because thats how the cannons point at 0deg), and negate (since thats how foundry rolls).
+    let d = 90-rad2deg(r);
+    cannon.update({rotation:d});
+
+    let ray = new Ray(players[i].center, cannon.object.center);
+    if (!canvas.walls.checkCollision(ray)){
+       // No collision means direct line of fire.
+       new Sequence()
+          .effect()
+             .atLocation(cannon.object.center)
+             .stretchTo(players[i].center)
+             .file("jb2a.bullet.02.orange")
+             .wait(250)
+             .effect()
+             .atLocation(players[i].center)
+             .file("jb2a.explosion.01.orange")
+        .play();
+    }
+  }    
+}
+}
+
+
+
+// Hacky way of avoiding binding multiple hooks.
+if ('cannon_O_o_hook' in document){
+  console.log("Released previously bound hook:", document.cannon_O_o_hook);
+  Hooks.off( 'updateToken', document.cannon_O_o_hook);
+}
+let hook_ID = Hooks.on("updateToken", onUpdateToken);
+document.cannon_O_o_hook = hook_ID;
+```
+
