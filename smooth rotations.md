@@ -22,8 +22,8 @@ let params =
             {
                 animType: "rotation",
                 val1: 0,
-                val2: +360,                
-                loopDuration: 10000,
+                val2: +360,
+                loopDuration: 10000, // One full rotation should take 10 seconds (in ms)
             }
         }
     }];
