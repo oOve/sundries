@@ -1,8 +1,8 @@
-# Smooth Rotations using TokenFX
+# Smooth Rotations using TokenMagic
 
 Modules in use:
- * TokenFX, for the actual rotation
- * Tagger, for marking and grabbing items to rotate
+ * [TokenMagic](https://foundryvtt.com/packages/tokenmagic), for the actual rotation
+ * [Tagger](https://foundryvtt.com/packages/tagger), for marking and grabbing items to rotate
 
 Using Tagger, tag all the things you wish to rotate with "cog". Then execute the following macro.
 ```JS
