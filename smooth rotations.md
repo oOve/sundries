@@ -1,5 +1,7 @@
 # Smooth Rotations using TokenMagic
 
+![ezgif-2-8ac675cfaa](https://user-images.githubusercontent.com/8543541/172260556-1780e0dd-6e82-492a-b77a-61037fb5699c.gif)
+
 Modules in use:
  * [TokenMagic](https://foundryvtt.com/packages/tokenmagic), for the actual rotation
  * [Tagger](https://foundryvtt.com/packages/tagger), for marking and grabbing items to rotate
