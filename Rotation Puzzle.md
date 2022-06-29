@@ -8,6 +8,10 @@ We want to create a puzzle where we need to rotate several disks, so that the fi
 
 ## Creating the disks
 I made my "disks" using inkscape. Cut an image into concetric circles using mask, clip and "distribute and align".
+
+![circle description](https://user-images.githubusercontent.com/8543541/176551518-077169c8-d6cc-4649-88bd-c4e76e1bcd79.png)
+
+Result:
 1. ![ring1](https://user-images.githubusercontent.com/8543541/175750183-9af16ffa-8f41-46ce-9261-cd1cb0141587.png)
 2. ![ring2](https://user-images.githubusercontent.com/8543541/175750195-d708e1f2-dcfd-43fd-b6fa-5f03717a46d2.png)
 3. ![ring3](https://user-images.githubusercontent.com/8543541/175750199-900707e7-adda-4fd3-93ac-9986730b2f7f.png)
