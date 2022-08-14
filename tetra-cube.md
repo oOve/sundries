@@ -2,6 +2,9 @@
 Ever wanted to publish your monsters created in Foundry on gmbinder, or just as a picture. Here is a macro that exports a Foundry NPC to a format readable by 
 http://tetra-cube.com/dnd/dnd-statblock.html
 From there you can export either as a stat block image, or as markdown readable by gmbinder and homebrewery. If you improve this macro, please share its improvements with me :)
+Here is an example export:
+![aspect of lamia (5)](https://user-images.githubusercontent.com/8543541/184555525-cf1f8019-ea6c-418e-ad85-8e2de4b21f19.png)
+
 
 ## Useage:
 Select a token, run the following macro. The json is now automatically placed in your clipboard, open an empty file, paste this json to it and save it as something.monster. You can now open this monster on 
