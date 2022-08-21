@@ -12,7 +12,7 @@
  ░                 ░              
  */
  
- let s = canvas.tokens.controlled;
+let s = canvas.tokens.controlled;
 let harvest = s.map(t=>{return {x:t.x, y:t.y}});
 let ids = s.map(t=>t.id);
 
