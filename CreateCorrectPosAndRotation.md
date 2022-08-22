@@ -13,7 +13,7 @@
  */
 
 let s = canvas.tokens.controlled;
-let harvest = s.map(t=>{return {x:t.x, y:t.y, r:t.rotation}});
+let harvest = s.map(t=>{return {x:t.x, y:t.y, r:t.data.rotation}});
 let ids = s.map(t=>t.id);
 
 let content = `
@@ -25,7 +25,7 @@ if (canvas.scene.id == '${canvas.scene.id}'){
     let tk = canvas.tokens.get(id);
     let i = 0;
     for (let p of positions){
-      if (p.x==tk.x && p.y==tk.y && p.r==tk.rotation){
+      if (p.x==tk.x && p.y==tk.y && p.r==tk.data.rotation){
         found[i]=true;
         break;
       }
