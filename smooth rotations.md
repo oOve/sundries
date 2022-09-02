@@ -8,10 +8,64 @@ Modules in use:
 
 Using Tagger, tag all the things you wish to rotate with "cog". Then execute the following macro.
 ```JS
-let params =
-    [{
+/*
+▓█████▄  ██▀███           ▒█████  
+▒██▀ ██▌▓██ ▒ ██▒        ▒██▒  ██▒
+░██   █▌▓██ ░▄█ ▒        ▒██░  ██▒
+░▓█▄   ▌▒██▀▀█▄          ▒██   ██░
+░▒████▓ ░██▓ ▒██▒ ██▓    ░ ████▓▒░
+ ▒▒▓  ▒ ░ ▒▓ ░▒▓░ ▒▓▒    ░ ▒░▒░▒░ 
+ ░ ▒  ▒   ░▒ ░ ▒░ ░▒       ░ ▒ ▒░ 
+ ░ ░  ░   ░░   ░  ░      ░ ░ ░ ▒  
+   ░       ░       ░         ░ ░  
+ ░                 ░              
+This macro is made by Dr.O_o 
+If you appreciate this, consider buying me a coffee
+at https://www.patreon.com/drO_o
+*/
+let p1 = [{
         filterType: "transform",
-        filterId: "savingRoll",
+        filterId: "rotateIt1",
+        autoDestroy: true,
+        padding: 1,
+        pivotX: 0.5,
+        pivotY: 0.5,
+        animated:
+        {
+            rotation:
+            {
+                animType: "rotation",
+                active:true,
+                val1: 0,
+                val2: +360,
+                clockWise: false,
+                loopDuration: 10000,
+            }
+        }
+    }];
+let p2 = [{
+        filterType: "transform",
+        filterId: "rotateIt2",
+        autoDestroy: true,
+        padding: 1,
+        pivotX: 0.5,
+        pivotY: 0.5,
+        animated:
+        {
+            rotation:
+            {
+                animType: "rotation",
+                active: true,
+                val1: 0,
+                val2: 360,
+                clockWise : true,    
+                loopDuration: 10000,
+            }
+        }
+    }];
+let p3 = [{
+        filterType: "transform",
+        filterId: "rotateIt3",
         autoDestroy: true,
         padding: 1,
         pivotX: 0.5,
@@ -22,13 +76,36 @@ let params =
             {
                 animType: "rotation",
                 val1: 0,
-                val2: +360,
-                loopDuration: 10000, // One full rotation should take 10 seconds (in ms)
+                val2: +360,                
+                loopDuration: 20000,
+            }
+        }
+    }];
+let p4 = [{
+        filterType: "transform",
+        filterId: "rotateIt4",
+        autoDestroy: true,
+        padding: 1,
+        pivotX: 0.5,
+        pivotY: 0.5,
+        animated:
+        {
+            rotation:
+            {
+                animType: "rotation",
+                val1: 0,
+                val2: 360,
+                clockWise: true,
+                loopDuration: 20000,
             }
         }
     }];
 
+
+let params = [p1,p2,p3,p4];
+
 for (let t of Tagger.getByTag("cog")){
-  TokenMagic.addUpdateFilters(t.object, params);
+  await TokenMagic.deleteFilters(t.object);
+  TokenMagic.addUpdateFilters(t.object, params[Math.floor(Math.random()*4)]);
 }
 ```
