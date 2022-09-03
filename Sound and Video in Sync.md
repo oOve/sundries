@@ -7,6 +7,7 @@ Do you want a video to play somewhere on your scene maybe started by an active t
  https://user-images.githubusercontent.com/8543541/188277176-f543cab1-5d9d-44ab-927b-b6b0d0ee880f.mp4
 </details>
 
+Artwork by [Forgotten Adventures](https://forgotten-adventures.net)
 
 Macro needed:
 ```JS
