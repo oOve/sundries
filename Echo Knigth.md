@@ -3,7 +3,7 @@
 **Dependencies**
  * Module: [Sequencer](https://foundryvtt.com/packages/sequencer)
  * Video: [JB2A](https://github.com/Jules-Bens-Aa/JB2A_DnD5e)
- * Sound: [file](https://freesound.org/people/kwahmah_02/sounds/269326/)
+ * Sound: [freesound.org](https://freesound.org/people/kwahmah_02/sounds/269326/)
 
 <details>
  <summary>Video Example, un-mute sound</summary> 
