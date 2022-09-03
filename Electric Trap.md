@@ -41,7 +41,7 @@ let seq = new Sequence()
     .duration(1000)
   .effect()
      .file("modules/JB2A_DnD5e/Library/Generic/Lightning/LightningBall_01_Regular_Blue_400x400.webm")
-     .atLocation(t)
+     .attachTo(t)
      .duration(1000)
   .play(); 
  ```
