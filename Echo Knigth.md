@@ -5,6 +5,14 @@
  * Video: [JB2A](https://github.com/Jules-Bens-Aa/JB2A_DnD5e)
  * Sound: [file](https://freesound.org/people/kwahmah_02/sounds/269326/)
 
+<details>
+ <summary>Video Example, un-mute sound</summary> 
+
+https://user-images.githubusercontent.com/8543541/188287372-47365451-b959-4a39-90c7-a2c0239c7a63.mp4
+</details>
+Artwork by [Forgotten Adventures](https://forgotten-adventures.net)
+
+
 Echo knights can switch their position with their echos at the cost of 15' of your movement. Want to automate that?
 Use the following macro:
 
