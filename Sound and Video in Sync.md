@@ -1,7 +1,11 @@
 
 Do you want a video to play somewhere on your scene maybe started by an active tile, and synchronized with a sound file?
 
-<video src="https://github.com/oOve/sundries/raw/main/media/steam_explosion.mp4"></video>
+<details>
+ <summary>Click here to show video example</summary> 
+ 
+ https://github.com/oOve/sundries/raw/main/media/steam_explosion.mp4
+</details>
 
 
 Macro needed:
