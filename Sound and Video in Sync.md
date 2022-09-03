@@ -35,9 +35,7 @@ let s = "PATH TO YOUR SOUND FILE";
 /*
 {x: canvas.background.controlled[0].center.x, 
  y: canvas.background.controlled[0].center.y, 
- r: canvas.background.controlled[0].data.rotation, 
- w: canvas.background.controlled[0].data.width, 
- h: canvas.background.controlled[0].data.height }
+ r: canvas.background.controlled[0].data.rotation }
 */
 // Copy its output in below, and delete the tile.
 // It should look something like:
