@@ -33,10 +33,9 @@ Use the following macro:
  If you like it, please consider buying me a coffee here: https://www.patreon.com/drO_o
  
  Some notes about this macro. 
- The variables player_character and echo_shadow automatically set to your users character name, 
- which might differ from his tokens name. If this is the case, you need to hardcode the varables to their correct name.
- The echo_shadow variable is set to the character name + "'s Shadow". If you have a different name for your shadow
- token, this must also be typed in below.
+ The variables player_character and echo_shadow is automatically set to the users character name, 
+ which might differ from their tokens name. If this is the case, hardcode the varables to their correct name.
+ The echo_shadow variable is set to the character name + "'s Shadow".
  */
 
 let player_character, echo_shadow;
