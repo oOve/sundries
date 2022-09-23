@@ -1,5 +1,7 @@
 # SMITE!!
-(System dnd5e)
+Requirements:
+ - (System dnd5e)
+ - Now updated to support both v9 and v10
 
 Playing a paladin, enjoying those smites?
 
@@ -24,16 +26,42 @@ The radio boxes for spell slot level will be greyed out based on your characters
  https://github.com/oOve/sundries
  */
 
+let c  = game.user.character;
+let tok;
+
+if(c === undefined ){
+  let t = canvas.tokens.controlled[0];
+  if (t===undefined){
+    ui.notifications.info("No character bound to this player, or token selected!");
+    return false;
+  }
+  c = t.actor;
+  tok = t;
+}else{
+  tok = game.user.character.token;
+}
+
+let spells;
+let accessor;
+if (game.version > 10){
+  spells = c.system.spells;
+  accessor = 'system.spells';
+}else{
+  spells = c.data.data.spells;
+  accessor = 'data.spells';
+}
+
+
 const myContent = `
   Slot: <input type="radio" name="slot" checked id="slot1" value="1"/>
         <label for="slot1">1</label>
         <input type="radio" name="slot" id="slot2" value="2"/>
         <label for="slot2">2</label>
-        <input type="radio" name="slot" id="slot3"/>
+        <input type="radio" name="slot" id="slot3" value="3"/>
         <label for="slot3">3</label>
-        <input type="radio" name="slot" id="slot4"/>
+        <input type="radio" name="slot" id="slot4" value="4"/>
         <label for="slot4">4</label>
-        <input type="radio" name="slot" id="slot5"/>
+        <input type="radio" name="slot" id="slot5" value="5"/>
         <label for="slot5">5</label>
     <br>
     <input type="checkbox" id="fiend"/>
@@ -58,29 +86,25 @@ new Dialog({
 
 
 function onRender(html){
-  let c = game.user.character;
-  if(c === null){
-    ui.notifications.info("No character bound to this player!");
-    return false;
-  }
 
-  if (c.system.spells.spell1.value===0){
+
+  if (spells.spell1.value===0){
     html.find("input#slot1").attr("disabled", true);
     html.find("input#slot1").attr("checked", false);
   }
-  if (c.system.spells.spell2.value===0){
+  if (spells.spell2.value===0){
     html.find("input#slot2").attr("disabled", true);
     html.find("input#slot2").attr("checked", false);
   }
-  if (c.system.spells.spell3.value===0){
+  if (spells.spell3.value===0){
     html.find("input#slot3").attr("disabled", true);
     html.find("input#slot3").attr("checked", false);
   }
-  if (c.system.spells.spell4.value===0){
+  if (spells.spell4.value===0){
     html.find("input#slot4").attr("disabled", true);
     html.find("input#slot4").attr("checked", false);
   }
-  if (c.system.spells.spell5.value===0){
+  if (spells.spell5.value===0){
     html.find("input#slot5").attr("disabled", true);
     html.find("input#slot5").attr("checked", false);
   }
@@ -90,7 +114,8 @@ function onRender(html){
 
 function SMITE(html) {  
   const value = html.find('input[name="slot"]:checked').val();
-  console.log("Value:", value);
+  //console.log("Value:", value);
+
   if (value===undefined){
     ui.notifications.info("No slot selected");
     return;
@@ -99,24 +124,24 @@ function SMITE(html) {
   let fiend= html.find("input#fiend:checked").val() == 'on';
 
   let dice = (Math.min(value, 4) + 1 + fiend) * (crit?2:1);
+  //console.log("Dice:", dice);
   let roll = new Roll(''+dice+'d8[radiant]');
-  
-  let msg = roll.toMessage({
-     speaker: game.user.character.token,
-     content: "SMITE!",
-     flavor: "Smite Damage Roll (Radiant)",
-     rollMode: 'roll'
-  });
+  //console.log("Roll:", roll);
 
+  //console.log("Token:", tok);  
+  let msg = roll.toMessage({
+     speaker: ChatMessage.getSpeaker(tok),
+     flavor: "Smite Damage Roll (Radiant)",     
+  });
   
- let c = game.user.character;
- let new_slots = c.system.spells['spell'+value].value - 1;
- let s = 'system.spells.spell'+value+'.value';
+
+ 
+ let new_slots = spells['spell'+value].value - 1;
+ let key = accessor + '.spell'+value+'.value';
  let d = {};
- d[s] = new_slots;
- console.log(d);
+ d[key] = new_slots;
+ //console.log(d);
  c.update(d);
 }
-
 
 ```
