@@ -6,6 +6,7 @@ Requirements:
 Playing a paladin, enjoying those smites?
 
 This macro will show the following dialog box:
+
 ![Skjermbilde 2022-09-21 020057](https://user-images.githubusercontent.com/8543541/191385708-e49474b9-3ab3-426d-914a-3132bd47f93a.png)
 
 The radio boxes for spell slot level will be greyed out based on your characters current spell slots. And this macro will roll that lovely SMITE damage, and deduct the chosen spell slot from the character.
@@ -53,7 +54,7 @@ if (game.version > 10){
 
 
 const myContent = `
-  Slot: <input type="radio" name="slot" checked id="slot1" value="1"/>
+  Slot: <input type="radio" name="slot" id="slot1" value="1" checked />
         <label for="slot1">1</label>
         <input type="radio" name="slot" id="slot2" value="2"/>
         <label for="slot2">2</label>
