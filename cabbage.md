@@ -11,3 +11,8 @@ He has a fancy animated token:
 And he quite frequently "summons" his guarding "cannon", though flavored as him splitting out a small part of himself:
 
 [shield_anim.webm](https://user-images.githubusercontent.com/8543541/193375763-1663fa6b-3786-4901-aebf-96ebc8a13a04.webm)
+
+The protector/shield is small, but it has an aura that stretches out 10'. That would correspond to a token "scale" of 6, but the slider doesn't go further than 3. This macro will set the prototypes scale to 6 anyway:
+```JS
+game.actors.getName('Cabbage Shield').update( {'token.scale':6} )
+```
