@@ -26,31 +26,33 @@ Requires:
 ```JS
 const summonType = "Cabbage Shield";
 
+// Delete old copies of this protector
+canvas.scene.deleteEmbeddedDocuments("Token", canvas.tokens.placeables.filter(t=>t.name==summonType).map(t=>t.id) );
 
-async function my_effect(template, update){
+async function preEffect(template, update){
   new Sequence()
     .effect()
-      .file('cabbage/acid_splash_CIRCLE_01.webm')
+      .file('cabbage/gloop2.webm')
       .atLocation(template)
       .center()      
         .scale(0.25)
-        //.aboveTokens()
       .play();
 }
 
-async function postEffects(template, token) {
-  //bring in our minion
+async function postEffect(template, token) {
+  //bring in our protector
   new Sequence()
     .animation()
         .on(token)
-            .fadeIn(500)
+            .fadeIn(1000)
     .play()
 }
 
 
 let updates = {
     token : {
-        'name':`${summonType}`
+        'name':`${summonType}`,
+        'alpha':0
     },
     actor: {
         'name' : `${summonType}`,
@@ -59,13 +61,15 @@ let updates = {
 }
 let callbacks = {
     pre: async (template, update) => {
-        my_effect(template,update);       
+        preEffect(template,update);
+        await warpgate.wait(1200);
     },
     post: async (template, token) => {
-      postEffects(template,token);
+      postEffect(template,token);
       await warpgate.wait(500);
     }
 }
+
 warpgate.spawn(summonType, updates, callbacks);
 ```
 
