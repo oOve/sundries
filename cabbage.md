@@ -16,3 +16,88 @@ The protector/shield is small, but it has an aura that stretches out 10'. That w
 ```JS
 game.actors.getName('Cabbage Shield').update( {'token.scale':6} )
 ```
+
+
+## Spawning a Shield Protector
+Requires:
+  * Warpgate
+  * Sequencer
+
+```JS
+const summonType = "Cabbage Shield";
+
+
+async function my_effect(template, update){
+  new Sequence()
+    .effect()
+      .file('cabbage/acid_splash_CIRCLE_01.webm')
+      .atLocation(template)
+      .center()      
+        .scale(0.25)
+        //.aboveTokens()
+      .play();
+}
+
+async function postEffects(template, token) {
+  //bring in our minion
+  new Sequence()
+    .animation()
+        .on(token)
+            .fadeIn(500)
+    .play()
+}
+
+
+let updates = {
+    token : {
+        'name':`${summonType}`
+    },
+    actor: {
+        'name' : `${summonType}`,
+        'data.attributes.hp': {value: 25, max: 25}
+    }
+}
+let callbacks = {
+    pre: async (template, update) => {
+        my_effect(template,update);       
+    },
+    post: async (template, token) => {
+      postEffects(template,token);
+      await warpgate.wait(500);
+    }
+}
+warpgate.spawn(summonType, updates, callbacks);
+```
+
+## Activating the Shield Guardian
+```JS
+let actor = game.user.character;
+let shields = canvas.tokens.placeables.filter(t=> t.name==='Cabbage Shield');
+if (shields.length < 1){ 
+  ui.notifications.warn("No protector!"); 
+  return;
+}
+if (shields.length > 1){
+  ui.notifications.warn("More than one protector!"); 
+  return;
+}
+let shield = shields[0];
+let r = new Roll('1d8+@intMod', {'intMod':actor.data.data.abilities.int.mod});
+
+await r.evaluate();
+r.toMessage( {'flavor':'Protector rolling for temp hp'} );
+let temp_hp = r.total;
+
+let tokens_affected = canvas.tokens.placeables.filter( t=>(canvas.grid.measureDistance(shield.center, t.center) < 14) );
+
+console.log("Temp HP rolled:", temp_hp);
+console.log("Updating:", tokens_affected);
+
+
+for (let t of tokens_affected){
+  let up = {'actor.data.attributes.hp.temp':temp_hp};
+  if (temp_hp > t.actor.data.data.attributes.hp.temp){    
+     warpgate.mutate(t.document, up, undefined, {description:'Cabbages Protector is granting you '+temp_hp+' temp HP'});
+  }
+}
+```
