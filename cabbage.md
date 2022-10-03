@@ -24,18 +24,19 @@ Requires:
   * Sequencer
 
 ```JS
-const summonType = "Cabbage Shield";
+const summonType = "Cabbages Protector";
 
-// Delete old copies of this protector
-canvas.scene.deleteEmbeddedDocuments("Token", canvas.tokens.placeables.filter(t=>t.name==summonType).map(t=>t.id) );
+const actor = game.user.character;
+const token = actor.getActiveTokens()[0];
+
+canvas.tokens.placeables.filter(t=>t.name==summonType).map(t=>t.id).forEach(t=>warpgate.dismiss(t));
 
 async function preEffect(template, update){
   new Sequence()
     .effect()
-      .file('cabbage/gloop2.webm')
-      .atLocation(template)
-      .center()      
-        .scale(0.25)
+      .file('ddb-images/characters/slosh.webm')
+      .atLocation(token)
+      .stretchTo(template)     
       .play();
 }
 
@@ -44,7 +45,7 @@ async function postEffect(template, token) {
   new Sequence()
     .animation()
         .on(token)
-            .fadeIn(1000)
+            .fadeIn(2000)
     .play()
 }
 
@@ -76,7 +77,7 @@ warpgate.spawn(summonType, updates, callbacks);
 ## Activating the Shield Guardian
 ```JS
 let actor = game.user.character;
-let shields = canvas.tokens.placeables.filter(t=> t.name==='Cabbage Shield');
+let shields = canvas.tokens.placeables.filter(t=> t.name==='Cabbages Protector');
 if (shields.length < 1){ 
   ui.notifications.warn("No protector!"); 
   return;
@@ -86,6 +87,17 @@ if (shields.length > 1){
   return;
 }
 let shield = shields[0];
+
+let wm = 'modules/JB2A_DnD5e/Library/Generic/Magic_Signs/NecromancyCircleIntro_02_Regular_Green_800x800.webm';
+
+new Sequence()
+  .effect()
+  .file(wm)
+  .atLocation(shield)
+  .scale(.66,.66)
+  .play()
+;
+
 let r = new Roll('1d8+@intMod', {'intMod':actor.data.data.abilities.int.mod});
 
 await r.evaluate();
@@ -99,9 +111,101 @@ console.log("Updating:", tokens_affected);
 
 
 for (let t of tokens_affected){
+  if (t.data.disposition != 1) continue;
+
   let up = {'actor.data.attributes.hp.temp':temp_hp};
   if (temp_hp > t.actor.data.data.attributes.hp.temp){    
      warpgate.mutate(t.document, up, undefined, {description:'Cabbages Protector is granting you '+temp_hp+' temp HP'});
   }
 }
 ```
+
+### Summoning the Homunculus
+```JS
+const summonType = "Cabbages Homunculus";
+
+const actor = game.user.character;
+const token = actor.getActiveTokens()[0];
+
+canvas.tokens.placeables.filter(t=>t.name==summonType).map(t=>t.id).forEach(t=>warpgate.dismiss(t));
+
+
+async function preEffect(template, update){
+  new Sequence()
+    .effect()
+      .file('ddb-images/characters/slosh.webm')
+      .atLocation(token)
+      .stretchTo(template)     
+      .play();
+}
+
+async function postEffect(template, token) {
+  //bring in our protector
+  new Sequence()
+    .animation()
+        .on(token)
+            .fadeIn(2000)
+    .play()
+}
+
+let updates = {
+    token : {
+        'name':`${summonType}`,
+        'alpha':0
+    },
+    actor: {
+        'name' : `${summonType}`,
+        'data.attributes.hp': {value: 25, max: 25}
+    }
+}
+let callbacks = {
+    pre: async (template, update) => {
+        preEffect(template,update);
+        await warpgate.wait(1200);
+    },
+    post: async (template, token) => {
+      postEffect(template,token);
+      await warpgate.wait(500);
+    }
+}
+
+warpgate.spawn(summonType, updates, callbacks);
+```
+
+
+### Acid Splash
+```JS
+const actor = game.user.character;
+const token = actor.getActiveTokens()[0];
+const target = Array.from(game.user.targets)?.[0];
+
+if(target){
+  new Sequence()
+    .effect()
+    .file('ddb-images/characters/slosh.webm')
+    .atLocation(token)
+    .stretchTo(target)
+    .randomizeMirrorY()
+    .play();
+}
+
+let splash = actor.items.getName('Acid Splash');
+splash.roll();
+```
+
+
+### Homunculus Force Strike
+```JS
+game.dnd5e.macros.rollItem("Homunculus Force Strike")
+
+new Sequence()
+    .effect()
+        .atLocation(canvas.tokens.controlled[0])
+        .stretchTo(Array.from(game.user.targets)[0])
+        .file("jb2a.magic_missile")        
+        .randomizeMirrorY()
+    .play();
+```
+
+
+
