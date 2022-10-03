@@ -39,7 +39,7 @@ if(c === undefined ){
   c = t.actor;
   tok = t;
 }else{
-  tok = game.user.character.token;
+  tok = game.user.character.getActiveTokens()[0];
 }
 
 let spells;
