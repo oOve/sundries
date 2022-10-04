@@ -1,9 +1,11 @@
 
 # Echo Knights in DnD 5e
 **Dependencies**
- * Module: [Sequencer](https://foundryvtt.com/packages/sequencer)
+ * Module: [Sequencer](https://foundryvtt.com/packages/sequencer), for playing fancy effects
+ * Module: [Warpgate](https://foundryvtt.com/packages/warpgate), for spawning, dynamically setting saves and AC and dismissing your shadow.
  * Video: [JB2A](https://github.com/Jules-Bens-Aa/JB2A_DnD5e)
  * Sound: [freesound.org](https://freesound.org/people/kwahmah_02/sounds/269326/)
+
 
 <details>
  <summary>Video Example, un-mute sound</summary> 
@@ -12,7 +14,81 @@ https://user-images.githubusercontent.com/8543541/188287372-47365451-b959-4a39-9
 </details>
 Artwork by [Forgotten Adventures](https://forgotten-adventures.net)
 
+## Echo Spawn
+Spawning the echo as a user, and with the option of dismissing it. (This macro will also remove your previous echo if you spawn a new one).
+```JS
+/*
+▓█████▄  ██▀███           ▒█████  
+▒██▀ ██▌▓██ ▒ ██▒        ▒██▒  ██▒
+░██   █▌▓██ ░▄█ ▒        ▒██░  ██▒
+░▓█▄   ▌▒██▀▀█▄          ▒██   ██░
+░▒████▓ ░██▓ ▒██▒ ██▓    ░ ████▓▒░
+ ▒▒▓  ▒ ░ ▒▓ ░▒▓░ ▒▓▒    ░ ▒░▒░▒░ 
+ ░ ▒  ▒   ░▒ ░ ▒░ ░▒       ░ ▒ ▒░ 
+ ░ ░  ░   ░░   ░  ░      ░ ░ ░ ▒  
+   ░       ░       ░         ░ ░  
+ ░                 ░              
+ This macro is written by Dr.O.
+ https://github.com/oOve/sundries
+ If you like it, please consider buying me a coffee here: https://www.patreon.com/drO_o
+ 
+ Some notes about this macro. 
+ The variables player_character and echo_shadow is automatically set to the users character name, 
+ which might differ from their tokens name. If this is the case, hardcode the varables to their correct name.
+ The echo_shadow variable is set to the character name + "'s Shadow".
+ */
+const actor = game.user.character;
+const summonType = actor.name + "'s Shadow";
 
+canvas.tokens.placeables.filter(t=>t.name==summonType).map(t=>t.id).forEach(t=>warpgate.dismiss(t));
+
+async function preEffect(template, update){
+  new Sequence()
+    .effect()
+      .file('modules/JB2A_DnD5e/Library/Generic/Smoke/SmokePuff01_02_Regular_Grey_400x400.webm')
+      .scale(.5)
+      .atLocation(template)     
+      .play();
+}
+
+async function postEffect(template, token) {
+  new Sequence()
+    .animation()
+        .on(token)
+            .fadeIn(1000)
+    .play()
+}
+
+
+let updates = {
+    token : {
+        'name':`${summonType}`,
+        'alpha':0
+    },
+    actor: {
+        'name' : `${summonType}`,
+        'data.attributes.hp': {value: 1, max: 1},
+        'data.attributes.ac': {flat: 14+actor.data.data.attributes.prof , calc:'flat'},
+        'data.abilities' : actor.data.data.abilities,
+        'data.details.cr' : actor.data.data.details.level
+    }
+}
+let callbacks = {
+    pre: async (template, update) => {
+        preEffect(template,update);
+        await warpgate.wait(1200);
+    },
+    post: async (template, token) => {
+      postEffect(template,token);
+      await warpgate.wait(500);
+    }
+}
+warpgate.spawn(summonType, updates, callbacks);
+```
+
+
+
+## Echo Relocate
 Echo knights can switch their position with their echos at the cost of 15' of your movement. Want to automate that?
 Use the following macro:
 
