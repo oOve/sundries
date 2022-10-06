@@ -54,7 +54,7 @@ if (game.version > 10){
 
 
 const myContent = `
-  Slot: <input type="radio" name="slot" id="slot1" value="1" checked />
+  Slot: <input type="radio" name="slot" checked id="slot1" value="1"/>
         <label for="slot1">1</label>
         <input type="radio" name="slot" id="slot2" value="2"/>
         <label for="slot2">2</label>
@@ -72,23 +72,8 @@ const myContent = `
     <label for="crit">Crit!</label>
 `;
 
-new Dialog({
-  title: "Smite!!",
-  content: myContent,
-  render: (html) => {onRender(html);},
-  buttons: {
-    button1: {
-      label: "Smite!",
-      callback: (html) => SMITE(html),
-      icon: `<i class="fas fa-check"></i>`
-    }
-  }
-}).render(true);
-
 
 function onRender(html){
-
-
   if (spells.spell1.value===0){
     html.find("input#slot1").attr("disabled", true);
     html.find("input#slot1").attr("checked", false);
@@ -115,34 +100,51 @@ function onRender(html){
 
 function SMITE(html) {  
   const value = html.find('input[name="slot"]:checked').val();
-  //console.log("Value:", value);
+  console.log("Value:", value);
 
+  
   if (value===undefined){
     ui.notifications.info("No slot selected");
     return;
   }
   let crit = html.find("input#crit:checked").val() == 'on';
   let fiend= html.find("input#fiend:checked").val() == 'on';
-
+  
+  
   let dice = (Math.min(value, 4) + 1 + fiend) * (crit?2:1);
-  //console.log("Dice:", dice);
+  console.log("Dice:", dice);
   let roll = new Roll(''+dice+'d8[radiant]');
-  //console.log("Roll:", roll);
+  console.log("Roll:", roll);
 
-  //console.log("Token:", tok);  
+  
+  console.log("Token:", tok);  
   let msg = roll.toMessage({
      speaker: ChatMessage.getSpeaker(tok),
      flavor: "Smite Damage Roll (Radiant)",     
   });
   
-
  
  let new_slots = spells['spell'+value].value - 1;
  let key = accessor + '.spell'+value+'.value';
  let d = {};
  d[key] = new_slots;
- //console.log(d);
+ console.log(d);
  c.update(d);
+
 }
 
+
+new Dialog({
+  title: "Smite!!",
+  content: myContent,
+  render: (html) => {onRender(html);},
+  buttons: {
+    button1: {
+      label: "Smite!",
+      //callback: (html)=>{},
+      callback: SMITE,
+      icon: `<i class="fas fa-check"></i>`
+    }
+  }
+}).render(true);
 ```
