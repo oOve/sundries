@@ -40,7 +40,7 @@ if (temp > ac.system.attributes.hp.temp){
 // Change over to "angry token"
 const actor = game.user.character;
 const token = actor.getActiveTokens()[0];
-token.document.update({'texture.src':'tokenizer/pc-images/moldy.angry.webm'});
+token.document.update({'texture.src':'moldy.angry.webm'});
 
 // Adding an active effect
 ac.createEmbeddedDocuments('ActiveEffect', [{
@@ -59,7 +59,6 @@ ac.createEmbeddedDocuments('ActiveEffect', [{
         "mode": 2
     }]
 }]);
-
 
 // Lets grow a bit :)
 token.document.update({'texture.scaleX':2, 'texture.scaleY':2} );
@@ -91,14 +90,14 @@ let me = ac.getActiveTokens()[0];
 if(t){
   new Sequence()
     .effect()
-    .file('tokenizer/pc-images/moldy.spores.webm')
+    .file('moldy.spores.webm')
     .atLocation(me)
     .stretchTo(t)
     .randomizeMirrorY()
     .play();
 }
 
-// Attack
+// Attack -- These two attacks needs to be created as weapons using the correct scaling in damage as specified in the spores subclass
 let nhos = ac.items.getName('Halo of Spores - Normal');
 let ehos = ac.items.getName('Halo of Spores - Enhanced');
 if (form){
@@ -134,7 +133,7 @@ let zombie_names = [
 async function preEffect(template, update){
   new Sequence()
     .effect()
-      .file('tokenizer/pc-images/moldy.spores.webm')
+      .file('moldy.spores.webm')
       .atLocation(token)
       .stretchTo(template)     
       .play();
@@ -185,7 +184,7 @@ let formName="Symbiotic Entity";
 ac.deleteEmbeddedDocuments( 'ActiveEffect', ac.effects.filter((el)=>(el.label==formName)).map(el=>el.id));
 
 // Change back to our non-angry texture
-ac.getActiveTokens().forEach(t=>t.document.update({'texture.src':'tokenizer/pc-images/moldy.movie.webm'}));
+ac.getActiveTokens().forEach(t=>t.document.update({'texture.src':'moldy.movie.webm'}));
 
 token.document.update({'texture.scaleX':1, 'texture.scaleY':1} );
 ```
