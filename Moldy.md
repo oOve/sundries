@@ -1,12 +1,15 @@
 # Moldy
 Meet Moldy, a circle of the spores druid, or as they would introduce themselves. 
 
-> Hi everyone, we are Moldy, we are very pleased to eat, I mean meet, you fellow biological creatures. 
-> (Concentrates hard, and produces something that looks like an arm)
+> Hi everyone, we are Moldy, we are very pleased to eat, I mean meet you fellow biological creatures. 
+> (Concentrates hard and produces something that looks like an arm)
 > Let us slap appendages, as we normal biological creatures do.
 
 ![download](https://user-images.githubusercontent.com/8543541/203871192-09eba78b-2391-4f9b-8992-57d448a7338f.png)
 
+All media files can be found in [moldy](Moldy/.)
+
+https://user-images.githubusercontent.com/8543541/203874758-50f7769a-8033-4fcc-b10f-2ce62ccb67d1.mp4
 
 ## Macros:
 
