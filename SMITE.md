@@ -110,6 +110,8 @@ function SMITE(html) {
   let crit = html.find("input#crit:checked").val() == 'on';
   let fiend= html.find("input#fiend:checked").val() == 'on';
   
+  // Play sound?, uncomment the following line
+  //AudioHelper.play({src: "smite.wav", volume: 1.0, autoplay: true, loop: false}, true);
   
   let dice = (Math.min(value, 4) + 1 + fiend) * (crit?2:1);
   console.log("Dice:", dice);
